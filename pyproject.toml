@@ -7,4 +7,5 @@ dependencies = [
     "gym>=0.26.2",
     "matplotlib>=3.11.2",
     "numpy>=2.5.5",
+    "pygame>=2.6.1",
 ]

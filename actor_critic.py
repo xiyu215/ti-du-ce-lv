@@ -98,3 +98,19 @@ for episode in range(episodes):
     reward_history.append(total_reward)
     if episode % 100 == 0:
         print(f"episode {episode}: total_reward = {total_reward}")
+
+# ---- 训练结束，用学到的策略演示一局（贪心动作，窗口按 50 FPS 播放）----
+env_demo = gym.make('CartPole-v0', render_mode='human')
+state, _ = env_demo.reset()
+done = False
+demo_reward = 0
+
+while not done:
+    probs = agent.pi(state[np.newaxis, :])[0]
+    action = int(np.argmax(probs.data))
+    state, reward, terminated, truncated, _ = env_demo.step(action)
+    done = terminated or truncated
+    demo_reward += reward
+
+print(f"demo episode: total_reward = {demo_reward}")
+env_demo.close()

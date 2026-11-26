@@ -14,6 +14,8 @@
 
 采用**每步更新**（one-step Actor-Critic），而非回合结束后批量更新。
 
+训练结束后脚本会再开一局**演示**：以 `render_mode='human'` 新建环境，按贪心动作（`argmax`）走完整回合，窗口以 50 FPS 播放，结束后打印该局回报并关闭窗口。演示用贪心动作而非采样，是为了让行为稳定、便于观察学到的策略。
+
 ## 运行
 
 ```bash
@@ -21,7 +23,7 @@ uv sync
 uv run actor_critic.py
 ```
 
-默认训练 3000 回合，每 100 回合打印一次 `total_reward`。
+默认训练 3000 回合，每 100 回合打印一次 `total_reward`；训练完毕后弹出 CartPole 窗口演示一局。
 
 ## 环境
 
@@ -32,6 +34,7 @@ uv run actor_critic.py
 | gym | >= 0.26.2 |
 | numpy | >= 2.5.5 |
 | matplotlib | >= 3.11.2 |
+| pygame | >= 2.6.1 |
 
 ## 兼容性说明
 
